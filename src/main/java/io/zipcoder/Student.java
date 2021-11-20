@@ -16,6 +16,25 @@ public class Student {
         this.examScores = new ArrayList<>(Arrays.asList(testScores));
     }
 
+
+    @Override
+    public String toString(){
+    return ("Student Name: " + getFirstName() + " " + getLastName()  +"\n"+
+             "> Average Score: " + getAverageExamScore() + "\n"+
+            "> Exam Scores: \n" + getTestScores());
+
+
+    }
+
+    public Double getAverageExamScore() {
+       Double sum = 0.0;
+       for(Double score : examScores){
+        sum += score;
+
+       }
+       return sum / examScores.size();
+    }
+
   public String setExamScore(int examNumber, double newScore){
        examScores.set(examNumber -1, newScore);
        return ("Exam " + examNumber + " -> " + examScores.get(examNumber - 1));
@@ -32,7 +51,7 @@ public class Student {
     public String getTestScores() {
         String testScores = "";
         for (int i = 0; i < examScores.size(); i++) {
-            testScores = ("Exam " + (i + 1) + " -> " + examScores.get(i) + "\n");
+            testScores += ("Exam " + (i + 1) + " -> " + examScores.get(i) + "\n");
         }
 
         return testScores;
@@ -58,4 +77,6 @@ public class Student {
     public ArrayList<Double> getExamScores() {
         return examScores;
     }
+
+
 }
