@@ -1,8 +1,11 @@
 package io.zipcoder;
 
+import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ClassroomTest {
 
@@ -52,5 +55,47 @@ public class ClassroomTest {
 
     }
 
+    @Test
+    public void removeStudent(){
+        // : Given
+        Double[] s1Scores = { 100.0, 150.0 };
+        Double[] s2Scores = { 225.0, 25.0 };
+
+        Student s1 = new Student("Leon", "Hunter", s1Scores);
+        Student s2 = new Student("Dolio", "Younger", s2Scores);
+        Student[] students = {s1,s2};
+        Classroom classroom = new Classroom(students);
+        Student[] expected = new Student[]{s2};
+
+
+        //When
+        Student[] actual = classroom.removeStudent("Leon","Hunter");
+
+        //Then
+        Assert.assertArrayEquals(expected, actual);
+    }
+
+
+
+    @Test
+    public void getStudentByGrade(){
+        //Given
+        Double[] s1Scores = { 100.0, 150.0 };
+        Double[] s2Scores = { 225.0, 125.0 };
+
+        Student s1 = new Student("Leon", "Hunter", s1Scores);
+        Student s2 = new Student("Dolio", "Younger", s2Scores);
+        Student[] students = {s1,s2};
+        Classroom classroom = new Classroom(students);
+        Student[] expected = new Student[]{s2 ,s1};
+
+
+        //When
+        List<Student> actual = new ArrayList<>(Arrays.asList(classroom.getStudentByScore()));
+
+        //Then
+        Assert.assertArrayEquals(expected, actual.toArray(new Student[0]));
+
+    }
 
 }

@@ -3,7 +3,7 @@ package io.zipcoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Student {
+public class Student implements Comparable<Student> {
     private String firstName;
     private String lastName;
     private int NumberOfExamsTaken;
@@ -18,26 +18,26 @@ public class Student {
 
 
     @Override
-    public String toString(){
-    return ("Student Name: " + getFirstName() + " " + getLastName()  +"\n"+
-             "> Average Score: " + getAverageExamScore() + "\n"+
-            "> Exam Scores: \n" + getTestScores());
+    public String toString() {
+        return ("Student Name: " + getFirstName() + " " + getLastName() + "\n" +
+                "> Average Score: " + getAverageExamScore() + "\n" +
+                "> Exam Scores: \n" + getTestScores());
 
 
     }
 
     public Double getAverageExamScore() {
-       Double sum = 0.0;
-       for(Double score : examScores){
-        sum += score;
+        Double sum = 0.0;
+        for (Double score : examScores) {
+            sum += score;
 
-       }
-       return sum / examScores.size();
+        }
+        return sum / examScores.size();
     }
 
-  public String setExamScore(int examNumber, double newScore){
-       examScores.set(examNumber -1, newScore);
-       return ("Exam " + examNumber + " -> " + examScores.get(examNumber - 1));
+    public String setExamScore(int examNumber, double newScore) {
+        examScores.set(examNumber - 1, newScore);
+        return ("Exam " + examNumber + " -> " + examScores.get(examNumber - 1));
 
     }
 
@@ -79,4 +79,11 @@ public class Student {
     }
 
 
+    @Override
+    public int compareTo(Student student) {
+        if (this.getAverageExamScore() > student.getAverageExamScore()) {
+            return -1;
+        } else
+            return 1;
+    }
 }
